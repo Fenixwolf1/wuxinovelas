@@ -1,0 +1,45 @@
+.blog .carousel-indicators {
+	left: 0;
+	top: auto;
+    bottom: -40px;
+
+}
+
+/* The colour of the indicators */
+.blog .carousel-indicators li {
+    background: #a3a3a3;
+    border-radius: 50%;
+    width: 8px;
+    height: 8px;
+}
+
+.blog .carousel-indicators .active {
+background: #707070;
+}
+
+
+#nombrecarrousel{
+    margin-left: 35%;
+}
+
+@media (max-width: 768px) {
+   #nombrecarrousel{
+       margin-left: 25%;
+   }
+   .col-md-3{
+       padding-top: 30px;
+       margin-left: 25%;
+   }
+   
+  }
+
+@media (max-width: 430px) {
+    #nombrecarrousel{
+        margin-left: 40%;
+    }
+    .col-md-3{
+        padding-top: 30px;
+        margin-left: 25%;
+    }
+    
+   }

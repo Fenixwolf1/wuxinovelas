@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% load static %}
+  <meta charset="utf-8">
+  <title>Wuxi novelas en español</title>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta content="" name="keywords">
+  <meta content="" name="description">
+
+  
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
+
+  <!-- Bootstrap CSS File -->
+  <link href="{% static 'lib/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+  <!-- Libraries CSS Files -->
+  <link rel="stylesheet" href="{% static 'css/w3.css' %}">
+
+  <link href="{% static 'lib/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet">
+  <link href="{% static 'lib/animate/animate.min.css' %}" rel="stylesheet">
+  <link href="{% static 'lib/ionicons/css/ionicons.min.css' %}" rel="stylesheet">
+  <link href="{% static 'lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+  <link href="{% static 'lib/lightbox/css/lightbox.min.css' %}" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  
+
+  <!-- Main Stylesheet File -->
+  <link href="{% static 'css/style.css' %}" rel="stylesheet">
+  <link href="{% static 'css/style2.css' %}" rel="stylesheet">
+  
+
+
+
+</head>
+
+<body>
+  
+  <!--==========================
+  Header
+  ============================-->
+  <header id="header" class="fixed-top">
+    <div class="container">
+
+      <div class="logo float-left">
+        
+        <a href="#intro" class="scrollto"><img src="{% static 'img/wuxinovelpage.png' %}" alt="" class="img-fluid"></a>
+      </div>
+
+      <nav class="main-nav float-right d-none d-lg-block">
+        <ul>
+          <li class="active"><a href="#intro">Home</a></li>
+          <li class="drop-down"><a href="">Generos</a>
+            <ul>
+              {% for genero in generos%}
+              {% if forloop.first %}<li class="drop-down"><a href="#">Generos 0</a><ul>{% endif %}
+                  <a href="{{genero.get_genero_slug_url}}">{{genero.genero}}</a>
+              {% if forloop.counter|divisibleby:7 %}</ul></li><li class="drop-down"><a href="#">Generos  {% widthratio forloop.counter 7 1 %}</a><ul>{% endif %}
+              {% if forloop.last %}</ul></li>{% endif %}
+              {% endfor %}
+            </ul>
+          </li>
+          <li><a href="#whyus">Ultimas actualizaciones</a></li>
+          
+          <li><div class="container">
+            <div class="row">
+                  <div class="span12">
+                    <form id="custom-search-form" class="form-search form-horizontal pull-right" method="GET" action="{% url 'search-view' %}">
+                      
+                      <div class="input-append span12">
+                          <input type="text" class="search-query" placeholder="Buscar novelas" name="busqueda" id="search" autocomplete="off">
+                          <input type="text" hidden name="page" value="0">
+                          <button type="submit" class="btn"><i class="fa fa-search"></i></button>
+                      </div>
+                  </form>
+                  </div>
+            </div>
+          </div></li>
+          
+        </ul>
+      </nav><!-- .main-nav -->
+      
+    </div>
+  </header><!-- #header -->
+
+  <!--==========================
+    Intro Section
+  ============================-->
+  <section id="intro" class="clearfix">
+    <div class="container">
+      <div class="intro-img">
+        
+      </div>
+      
+     
+    
+      <div class="intro-info">
+        <div>
+          <h2>Explora<br><span>Mundos de</span><br> Fantasia y Aventura</h2>
+          <a href="#about" class="btn-get-started scrollto">Buscar novelas</a>
+        </div>
+      </div>
+
+    </div>
+  </section><!-- #intro -->
+
+  <main id="main">
+
+    <!--==========================
+      About Us Section
+    ============================-->
+    <section id="about">
+      <div class="container">
+        <div class="row blog">
+            <div class="col-md-12">
+                <div id="blogCarousel" class="carousel slide" data-ride="carousel">
+
+                    <h1  id="nombrecarrousel">Ultimas novelas</h1>
+
+                    <!-- Carousel items -->
+                    <div class="carousel-inner">
+
+                        <div class="carousel-item active">
+                            <div class="row">
+                              {% for novel in nc_novels %}
+                                <div class="col-md-3">
+                                    <a href="{{novel.get_novel_url}}">
+                                      <div style="text-align: center;">
+                                        <img src="{{novel.img.url}}" alt="Image" style="max-width:100%;" title="{{novel.titulo}}">
+                                        <h5 style="font-family: 'Roboto Condensed',sans-serif;margin-top: 10px;">{{novel.titulo}}</h5>
+                                      </div>
+                                    </a>
+                                </div>
+                              {% endfor %}
+                            </div>
+                            <!--.row-->
+                        </div>
+                        <!--.item-->
+
+                        <div class="carousel-item">
+                            <div class="row">
+                              {% for novel in nj_novels %}
+                                <div class="col-md-3">
+                                    <a href="{{novel.get_novel_url}}">
+                                      <div style="text-align: center;">
+                                        <img src="{{novel.img.url}}" alt="Image" style="max-width:100%;" title="{{novel.titulo}}">
+                                        <h5 style="font-family: 'Roboto Condensed',sans-serif;margin-top: 10px;">{{novel.titulo}}</h5>
+                                      </div>
+                                      </a>
+                                </div>
+                              {% endfor %}
+                            </div>
+                            <!--.row-->
+                        </div>
+                        <!--.item-->
+
+                        
+
+                    </div>
+                    <!--.carousel-inner-->
+                </div>
+                <!--.Carousel-->
+
+            </div>
+        </div>
+</div>
+    </section><!-- #about -->
+
+    <section id="whyus">
+      <hr>
+      <div class="container">
+        <header class="section-header">
+          <h3>Ultimas actualizaciones</h3>
+        </header>
+        <div class="row about-container">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Novela</th>
+                <th>Capitulo</th>
+                <th style="text-align: center;">Generos</th>
+                <th>Actualizado</th>
+              </tr>
+            </thead>
+            <tbody class="tabla-actualizaciones">
+              {% for chapter in chapter_list %}
+              <tr>
+                <td><a href="{{chapter.get_novel_url}}" > {{chapter.novel_info.titulo}}</a></td>
+                <td><a href="{{chapter.get_chapter_url}}">{{chapter.nombre}}</a></td>
+                <td style="text-align: center;">
+                  {% for genero in chapter.novel_info.generos.all|slice:"3" %}
+                  <a href="{% url 'genero-view' genero.genero_slug 0 %}">{{genero.genero}}</a>,
+                  {% endfor %}
+                </td>
+                <td>Hace {{chapter.get_posted_time}}</td>
+              </tr>
+              {% endfor %}
+             
+            </tbody>
+          </table>
+          
+        </div>
+
+      </div>
+
+    </section>
+    
+    
+   
+      
+    
+    
+    
+    
+    
+    
+
+  <!--==========================
+    Footer
+  ============================-->
+  <footer id="footer">
+   
+    <div class="container">
+      <div class="copyright">
+        &copy; Copyright <strong>Wuxi Novelas</strong>. Todos los derechos reservados
+      </div>
+      <div class="credits">
+        
+        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      </div>
+    </div>
+  </footer><!-- #footer -->
+
+  <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+
+  <!-- JavaScript Libraries -->
+  <script src="{% static 'lib/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'lib/jquery/jquery-migrate.min.js' %}"></script>
+  <script src="{% static 'lib/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'lib/easing/easing.min.js' %}"></script>
+  <script src="{% static 'lib/mobile-nav/mobile-nav.js' %}"></script>
+  <script src="{% static 'lib/wow/wow.min.js' %}"></script>
+  <script src="{% static 'lib/waypoints/waypoints.min.js' %}"></script>
+  <script src="{% static 'lib/counterup/counterup.min.js' %}"></script>
+  <script src="{% static 'lib/owlcarousel/owl.carousel.min.js' %}"></script>
+  <script src="{% static 'lib/isotope/isotope.pkgd.min.js' %}"></script>
+  <script src="{% static 'lib/lightbox/js/lightbox.min.js' %}"></script>
+  
+  <!-- Template Main Javascript File -->
+  <script src="{% static 'js/main.js' %}"></script>
+
+  <script src="{% static 'js/homeslider.js' %}"></script>
+
+  
+
+
+
+
+  
+
+</body>
+</html>

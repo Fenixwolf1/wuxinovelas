@@ -1,0 +1,66 @@
+<html>
+<title>{{nombre}} en español - Wuxi novelas</title>
+<meta charset="UTF-8">
+{% load static %}
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="{% static 'css/w3.css' %}">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Karma", sans-serif}
+.w3-bar-block .w3-bar-item {padding:20px}
+</style>
+<body>
+
+<!-- Navbar (sit on top) -->
+<div class="w3-top">
+    <div class="w3-bar w3-white w3-card" id="myNavbar">
+      <a href="{% url 'home-view' %}" class="w3-bar-item w3-button w3-wide" ><img class ="logowuxi" src="{% static 'img/wuxi.png' %}" ></img></a>
+      <!-- Right-sided navbar links -->
+      <div class="w3-right w3-hide-small">
+        <a href="{% url 'home-view' %}" class="w3-bar-item w3-button" style="margin-top: 20px;margin-right: 20px;text-decoration: none;">Inicio</a>
+        
+      </div>
+      
+    </div>
+  </div>
+  
+<!-- !PAGE CONTENT! -->
+<div class="w3-main w3-content w3-padding" style="max-width:1200px;margin-top:100px">
+  <h1 style="margin-left: 40%;margin-top: -60px;">{{nombre}}</h1>
+
+  <!-- First Photo Grid-->
+  {% for novela in novelas %}
+  {% if forloop.first %}<div class="w3-row-padding w3-padding-16 w3-center" id="food">{% endif %}
+    <div class="w3-quarter">
+      <a href="{{novela.get_novel_url}}"><img src="{{novela.img.url}}" alt="Sandwich" style="width:100%"></a>
+      <a href="{{novela.get_novel_url}}" style="text-decoration: none;"><h3>{{novela.titulo}}</h3></a>
+    </div>
+      {% if forloop.counter|divisibleby:4 %}</div><div class="w3-row-padding w3-padding-16 w3-center" id="food">{% endif %}
+      {% if forloop.last %}</div>{% endif %}
+    {% endfor %}
+  </div>
+  
+  
+
+  <!-- Pagination -->
+  <div class="w3-center w3-padding-32">
+    <div class="w3-bar">
+      <a href="{% url 'genero-view' genero 0 %}" class="w3-bar-item w3-button w3-hover-black " >«</a>
+      {% for page in paginator %}
+      <a href="{% url 'genero-view' genero page %}" class="w3-bar-item w3-{% if page == pagina %}black w3-button {% else %}button w3-hover-black{% endif %}">{{page}}</a>
+      {% endfor %}
+      <a href="{% url 'genero-view' genero max_pag %}" class="w3-bar-item w3-button w3-hover-black">»</a>
+    </div>
+  </div>
+  
+  <hr id="about">
+  <footer class="w3-container w3-teal w3-center w3-margin-top">
+    <p>&copy; Copyright <strong>Wuxi Novelas</strong>. Todos los derechos reservados</p>
+  </footer>
+<!-- End page content -->
+</div>
+
+
+
+</body>
+</html>

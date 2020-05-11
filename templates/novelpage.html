@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<title>{{novel.titulo}} novela en español - Wuxi novelas</title>
+<meta charset="UTF-8">
+{% load static %}
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="{% static 'css/w3.css' %}">
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<style>
+html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
+</style>
+<body class="w3-light-grey">
+ <!-- Navbar (sit on top) -->
+<div class="w3-top">
+  <div class="w3-bar w3-white w3-card" id="myNavbar">
+    <a href="{% url 'home-view' %}" class="w3-bar-item w3-button w3-wide" ><img class ="logowuxi" src="{% static 'img/wuxi.png' %}" ></img></a>
+    <!-- Right-sided navbar links -->
+    <div class="w3-right w3-hide-small">
+      
+      <a href="{% url 'home-view' %}" class="w3-bar-item w3-button" style="margin-top: 20px;margin-right: 20px;text-decoration: none;">Inicio</a>
+      
+    </div>
+    
+  </div>
+</div>
+
+
+
+<!-- Page Container -->
+<div class="w3-content w3-margin-top" style="max-width:1350px;">
+
+  <!-- The Grid -->
+  <div class="w3-row-padding">
+  
+    <!-- Left Column -->
+    <div class="w3-third" >
+    
+      <div class="w3-white w3-text-grey w3-card-4">
+        <div class="w3-display-container">
+          <img src="{{novel.img.url}}" style="width:100%;height: 400px" alt="Avatar">
+          
+        </div>
+        <div class="w3-container">
+          <br>
+          <p><i class="fa fa-pencil fa-fw w3-margin-right w3-large w3-text-teal"></i>{{novel.autor}}</p>
+          <p><i class="fa fa-bars fa-fw w3-margin-right w3-large w3-text-teal"></i>{{novel.get_categoria_display}}</p>
+          <p><i class="fa fa-calendar fa-fw w3-margin-right w3-large w3-text-teal"></i>{{novel.estado}}</p>
+          <p><i class="fa fa-user fa-fw w3-margin-right w3-large w3-text-teal"></i>{{novel.traductor}}</p>
+          <hr>
+
+          <p class="w3-large w3-text-theme"><b><i class="fa fa-asterisk fa-fw w3-margin-right w3-text-teal"></i>Generos</b></p>
+          
+          {% for genero in novel.generos.all %}
+          <span>  {{genero}} </span>
+          <div class="w3-light-grey w3-round-xlarge">
+            <div class="w3-round-xlarge w3-teal" style="height:24px;width:100%"></div>
+          </div>
+          <br>
+          {% endfor %}
+          
+          <br>
+
+          
+        </div>
+      </div><br>
+
+    <!-- End Left Column -->
+    </div>
+
+    <!-- Right Column -->
+    <div class="w3-twothird">
+    
+      <div class="w3-container w3-card w3-white w3-margin-bottom">
+        <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-book fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>{{novel.titulo}}</h2>
+        <div class="w3-container">
+          <h5 class="w3-text-teal"><b>Sinopsis</b></h5>
+          
+          <p>{{novel.sinopsis|linebreaks}}</p>
+          <hr>
+          <hr>
+        </div>
+       
+       
+      </div>
+
+      <div class="w3-container w3-card w3-white">
+        <section id="tabs" class="project-tab">
+          <div class="container">
+              <div class="row">
+                  <div class="col-md-12">
+                    <br>
+                      <nav>
+                          <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                              
+                              
+                              {% for tab in tabs%}
+                              <a class="nav-item nav-link {% if chapter_page == tab %} active {% endif %}" id="nav-contact-tab"  href="{% url 'novel-view' slug_novel tab %}" role="tab" aria-controls="nav-contact" >{% widthratio  tab 1 50 %}-{% widthratio  tab|add:'1' 1 50 %}</a>
+                              {% endfor %}
+                            </div>
+                      </nav>
+                      <div class="tab-content" id="nav-tabContent">
+                          <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                              <table class="table" cellspacing="0" >
+                                  
+                                  <tbody>
+                                    {% for chapter in chapters %}
+                                      {% if forloop.first %}<tr>{% endif %}
+                                        <td><a href="{{chapter.get_chapter_url}}">Capitulo {{chapter.num}}</a></td>
+                                      {% if forloop.counter|divisibleby:5 %}</tr><tr>{% endif %}
+                                      {% if forloop.last %}</tr>{% endif %}
+                                    {% endfor %}
+                
+                                  </tbody>
+                              </table>
+                          </div>
+                         
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </section>
+       
+        
+      </div>
+      
+      </div>
+
+    <!-- End Right Column -->
+    </div>
+    
+  <!-- End Grid -->
+  </div>
+  
+  <!-- End Page Container -->
+</div>
+
+<footer class="w3-container w3-teal w3-center w3-margin-top">
+  <p>&copy; Copyright <strong>Wuxi Novelas</strong>. Todos los derechos reservados</p>
+</footer>
+
+</body>
+</html>
