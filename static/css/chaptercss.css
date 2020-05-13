@@ -110,8 +110,20 @@ body.night .content p
 .btn.btn-outline { background-color: transparent; }
 
 @media screen and (max-width: 767px) {
-    .navbar .navbar-collapse .navbar-right > li:last-child { padding-left: 15px; padding-right: 15px; } 
+    .navbar .navbar-collapse .navbar-right > li:last-child { padding-left: 60px; padding-right: 15px; } 
+    .toggle{
+        position: absolute;
+        top: 80px;
+        right: 20px;
+        background: #fff;
+        border: 1px solid #00151f;
+        width: 46px;
+        height: 20px;
+        cursor: pointer;
+        border-radius: 20px;
+        transition: 0.5s;
     
+    }
     .navbar .nav-collapse { margin: 7.5px auto; padding: 0; }
     .navbar .nav-collapse .navbar-form { margin: 0; }
     .nav-collapse>li { float: none; }

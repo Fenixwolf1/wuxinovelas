@@ -39,7 +39,11 @@
   <link href="{% static 'css/style.css' %}" rel="stylesheet">
   <link href="{% static 'css/style2.css' %}" rel="stylesheet">
   
-
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+    }
+  </script>
 
 
 </head>
@@ -59,6 +63,7 @@
 
       <nav class="main-nav float-right d-none d-lg-block">
         <ul>
+          
           <li class="active"><a href="#intro">Home</a></li>
           <li class="drop-down"><a href="">Generos</a>
             <ul>
@@ -175,12 +180,14 @@
         </div>
 </div>
     </section><!-- #about -->
-
+    
     <section id="whyus">
+      
       <hr>
       <div class="container">
         <header class="section-header">
           <h3>Ultimas actualizaciones</h3>
+          <h3><div id="google_translate_element"></div></h3>
         </header>
         <div class="row about-container">
           <table class="table table-striped">
@@ -261,6 +268,7 @@
 
   <script src="{% static 'js/homeslider.js' %}"></script>
 
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
   
 
 
